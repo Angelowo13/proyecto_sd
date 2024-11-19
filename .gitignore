@@ -3,4 +3,4 @@
 /back/servicio2/node_modules
 /back/servicio3/node_modules
 /back/servicio4/node_modules
-/front/front/node_modules
+./front/front/node_modules
