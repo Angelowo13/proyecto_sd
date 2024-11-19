@@ -1,30 +1,37 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+import { RegistrarService } from '../../services/registrar.service';
+import { Router } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registrar',
   standalone: true,
-  imports: [ReactiveFormsModule,HttpClientModule],
+  imports: [HttpClientModule, FormsModule,CommonModule],
   templateUrl: './registrar.component.html',
   styleUrls: ['./registrar.component.css'],
 })
 export class RegistrarComponent {
-  registroForm: FormGroup;
+  message: string = '';
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
-    this.registroForm = this.fb.group({
-      nombre_usuario: ['', [Validators.required]],
-      correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', [Validators.required, Validators.minLength(6)]],
-    });
-  }
+  constructor(private registrarService: RegistrarService, private router: Router) {}
 
-  registrarUsuario() {
-    if (this.registroForm.valid) {
-      const usuario = this.registroForm.value;
+  onSubmit(form: NgForm) {
+    const { email, password, nombre } = form.value;
 
-      
-    }
+    this.registrarService.registrar(email, password, nombre).subscribe(
+      (response) => {
+        console.log('Registro exitoso:', response);
+        this.message = 'Registro exitoso. Redirigiendo a login...';
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Error en el registro:', error);
+        this.errorMessage = 'Ocurrió un error durante el registro. Intenta de nuevo.';
+      }
+    );
   }
 }

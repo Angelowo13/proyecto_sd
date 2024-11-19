@@ -11,8 +11,8 @@ export class RegistrarService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string,contrasena:string): Observable<any> {
-    const body = { email, contrasena };
+  registrar(email: string,contrasena:string,nombre:string): Observable<any> {
+    const body = { email, contrasena, nombre};
     return this.http.post<any>(`${this.apiUrl}registro`, body);
   }  
 }
