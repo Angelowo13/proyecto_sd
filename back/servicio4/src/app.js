@@ -20,4 +20,4 @@ app.use((req,res,next)=> {
 })
 
 app.listen(PORT)
-console.log('http://localhost:3000/ping/')
+console.log('http://localhost:'+PORT+'/')

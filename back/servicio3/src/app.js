@@ -1,6 +1,5 @@
 import  express  from 'express';
 import indexrouter from './routes/app.routes.js';
-
 import { PORT } from './config/app.config.js'
 import cors from 'cors'
 
@@ -19,4 +18,4 @@ app.use((req,res,next)=> {
 })
 
 app.listen(PORT)
-console.log('http://localhost:3000/ping/')
+console.log('http://localhost:'+PORT+'/')
