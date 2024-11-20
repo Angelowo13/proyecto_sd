@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,32 +9,39 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent  implements OnInit {
   isLoggedIn = false;
   nombreUsuario = '';
 
   constructor(
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: any
-  ) {
-    this.checkUserStatus();
+    private cdr: ChangeDetectorRef  // Para forzar la actualización del componente
+  ) {}
+
+  ngOnInit(): void {
+    this.checkUserStatus(); // Comprobar el estado de login al cargar el componente
   }
 
+  // Comprobar si el usuario está logueado desde localStorage
   checkUserStatus(): void {
-    if (isPlatformBrowser(this.platformId)) {  // Verificar que estamos en el navegador
-      const usuario = localStorage.getItem('usuario');
-      if (usuario) {
-        this.isLoggedIn = true;
-        this.nombreUsuario = JSON.parse(usuario).nombre_usuario;
-      }
+    const usuario = localStorage.getItem('usuario');
+    if (usuario) {
+      this.isLoggedIn = true;
+      this.nombreUsuario = JSON.parse(usuario).nombre_usuario;
     }
   }
 
+  // LogOut: Eliminar datos del usuario y redirigir
   logout(): void {
-    if (isPlatformBrowser(this.platformId)) {  // Solo acceder a localStorage en el navegador
-      localStorage.removeItem('usuario');
-    }
+    localStorage.removeItem('usuario');
     this.isLoggedIn = false;
-    this.router.navigate(['/login']); // Redirigir al inicio de sesión
+    this.nombreUsuario = '';
+    this.router.navigate(['/login']);  // Redirigir al login
+  }
+
+  // Forzar la actualización del estado en el header después del login
+  updateLoginState() {
+    this.checkUserStatus();
+    this.cdr.detectChanges();  // Forzar la actualización del componente
   }
 }

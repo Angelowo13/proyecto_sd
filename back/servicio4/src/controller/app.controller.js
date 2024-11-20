@@ -36,8 +36,8 @@ export const vertarea_espejo = async (req, res) => {
             titulo: transformarTexto(tarea.titulo),
             descripcion: transformarTexto(tarea.descripcion),
         }));
-
-        res.status(200).json({ tareas: tareasTransformadas });
+        
+        res.status(200).json({ tareasTransformadas });
     } catch (error) {
         res.status(500).json({ message: 'ERROR: No se pudo obtener las tareas en el espejo' });
     }

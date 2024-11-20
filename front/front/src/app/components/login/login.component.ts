@@ -3,11 +3,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { LoginService } from "../../services/login.service";
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,HttpClientModule],
+  imports: [CommonModule,FormsModule,HttpClientModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -26,7 +27,7 @@ export class LoginComponent {
       (response) => {
         console.log('Login exitoso:', response);
         localStorage.setItem('usuario', JSON.stringify(response.usuario));  // Guarda el usuario en localStorage
-        this.router.navigate(['/']);  // Redirige a la página principal
+        this.router.navigate(['/tarea']);  // Redirige a la página principal
       },
       (error) => {
         console.error('Error en el login:', error);

@@ -1,1 +1,55 @@
-<p>tarea works!</p>
+<div class="task-container">
+    <h1>Tareas</h1>
+  
+    <!-- Formulario para agregar tarea -->
+    <form (ngSubmit)="agregarTarea()" class="task-form">
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" [(ngModel)]="nuevaTarea.titulo" name="titulo" required class="input-field" />
+      </div>
+  
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" [(ngModel)]="nuevaTarea.descripcion" name="descripcion" required class="input-field"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="fecha_inicio">Fecha de inicio</label>
+        <input type="date" id="fecha_inicio" [(ngModel)]="nuevaTarea.fecha_inicio" name="fecha_inicio" required class="input-field" />
+      </div>
+  
+      <div class="form-group">
+        <label for="fecha_termino">Fecha de término</label>
+        <input type="date" id="fecha_termino" [(ngModel)]="nuevaTarea.fecha_termino" name="fecha_termino" required class="input-field" />
+      </div>
+  
+      <button type="submit" class="submit-btn">Agregar tarea</button>
+    </form>
+  
+    <hr />
+  
+    <!-- Mostrar tareas -->
+    <div *ngIf="tareas && tareas.length" class="task-list">
+      <ul>
+        <li *ngFor="let tarea of tareas" class="task-item">
+          <h3>{{ tarea.titulo }}</h3>
+          <p>{{ tarea.descripcion }}</p>
+          <p><strong>Fecha de inicio:</strong> {{ tarea.fecha_inicio }} | <strong>Fecha de término:</strong> {{ tarea.fecha_termino }}</p>
+          
+          <!-- Estado de la tarea -->
+          <div class="status-container">
+            <label for="estado-{{ tarea.id }}">Estado:</label>
+            <select id="estado-{{ tarea.id }}" [(ngModel)]="tarea.estado" (change)="modificarEstado(tarea)" class="status-select">
+              <option value="Pendiente">Pendiente</option>
+              <option value="En progreso">En progreso</option>
+              <option value="Completada">Completada</option>
+            </select>
+          </div>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Mensaje cuando no hay tareas -->
+    <p *ngIf="!tareas || tareas.length === 0" class="no-tasks-message">No tienes tareas aún.</p>
+  </div>
+  

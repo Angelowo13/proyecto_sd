@@ -4,11 +4,9 @@
       <a routerLink="/">Mi Aplicación</a>
     </div>
     <ul class="nav-links">
-      <li *ngIf="!isLoggedIn"><a routerLink="/">Inicio</a></li>
-      <li *ngIf="!isLoggedIn"><a routerLink="/about">Acerca de</a></li>
-      <li *ngIf="!isLoggedIn"><a routerLink="/contact">Contacto</a></li>
-      <li *ngIf="!isLoggedIn"><a routerLink="/login">Iniciar sesión</a></li>
-      <li *ngIf="isLoggedIn"><a routerLink="/profile">{{ nombreUsuario }}</a></li>
+      <li *ngIf="!isLoggedIn"><a href="/">Inicio</a></li>
+      <li *ngIf="!isLoggedIn"><a href="/login">Iniciar sesión</a></li>
+      <li *ngIf="isLoggedIn"><a href="/tarea">{{ nombreUsuario }}</a></li>
       <li *ngIf="isLoggedIn"><a href="#" (click)="logout()">Salir</a></li>
     </ul>
   </nav>

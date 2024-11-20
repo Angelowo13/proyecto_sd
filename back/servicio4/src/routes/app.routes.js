@@ -4,9 +4,9 @@ import { estado_espejo, registrar_tarea_espejo, vertarea_espejo } from '../contr
 const router = express.Router();
 
 
-router.post('/espejo/registrar-tarea', registrar_tarea_espejo);
-router.post('/espejo/ver-tarea', vertarea_espejo);
-router.post('/espejo/actualizar-estado', estado_espejo);
+router.post('/registrar-tarea', registrar_tarea_espejo);
+router.post('/ver-tarea', vertarea_espejo);
+router.post('/actualizar-estado', estado_espejo);
 //creacion de rutas 
 
 export default router;

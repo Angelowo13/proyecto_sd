@@ -1,26 +1,28 @@
-<form #registroForm="ngForm" (ngSubmit)="onSubmit(registroForm)">
-  <div>
+<form #registroForm="ngForm" (ngSubmit)="onSubmit(registroForm)" class="registro-form">
+  <h2>Registrar Usuario</h2>
+
+  <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" id="nombre" name="nombre" ngModel required />
+    <input type="text" id="nombre" name="nombre" ngModel required class="input-field" />
   </div>
   
-  <div>
+  <div class="form-group">
     <label for="email">Correo Electrónico</label>
-    <input type="email" id="email" name="email" ngModel required />
+    <input type="email" id="email" name="email" ngModel required class="input-field" />
   </div>
 
-  <div>
+  <div class="form-group">
     <label for="password">Contraseña</label>
-    <input type="password" id="password" name="password" ngModel required />
+    <input type="password" id="password" name="password" ngModel required class="input-field" />
   </div>
 
-  <div *ngIf="errorMessage" style="color: red;">
+  <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
-  <button type="submit" [disabled]="!registroForm.valid">Registrar</button>
+  <button type="submit" [disabled]="!registroForm.valid" class="submit-btn">Registrar</button>
 
-  <div *ngIf="message" style="color: green;">
+  <div *ngIf="message" class="success-message">
     {{ message }}
   </div>
 </form>
