@@ -1,0 +1,15 @@
+<header class="header">
+  <nav class="navbar">
+    <div class="logo">
+      <a routerLink="/">Mi Aplicación</a>
+    </div>
+    <ul class="nav-links">
+      <li *ngIf="!isLoggedIn"><a routerLink="/">Inicio</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/about">Acerca de</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/contact">Contacto</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login">Iniciar sesión</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/profile">{{ nombreUsuario }}</a></li>
+      <li *ngIf="isLoggedIn"><a href="#" (click)="logout()">Salir</a></li>
+    </ul>
+  </nav>
+</header>
