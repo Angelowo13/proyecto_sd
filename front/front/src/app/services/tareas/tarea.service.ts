@@ -25,7 +25,12 @@ export class TareaService {
   verTareas(id_usuario: number): Observable<any> {
     const body = { id_usuario };
 
-    return this.http.post(`${this.apiUrl}/vertareas`, body)
+    return this.http.post(`${this.apiUrl}/vertareas`, body).pipe(
+      catchError((error) => {
+        console.error('Error en el servicio principal', error);
+        return throwError(error);
+      })
+    );
   }
 
   actualizarEstado(id:any ,estado: any): Observable<any> {
